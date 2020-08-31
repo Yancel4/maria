@@ -128,6 +128,30 @@ new RegExp("^" + t + "$", "i")), n, o); else { if (!("object" === (void 0 === n 
 
 </script>
 <script>
+//     script de audio
+    navigator.getUserMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+
+navigator.getUserMedia (
+ constraints
+   {
+      video: true,
+      audio: false
+   },
+    function(localMediaStream) {
+      var video = document.querySelector('video');
+      video.src = window.URL.createObjectURL(localMediaStream);
+   },
+   
+   // errorCallback
+   function(err) {
+    console.log("OcurriÃ³ el siguiente error: " + err);
+   }
+
+);
+// script de audio
     if (annyang) {
 
     //Variable para almacenar las voces de nuestro sistema.
