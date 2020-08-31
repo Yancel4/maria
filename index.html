@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{ 
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       min-height: 100vh;
+       flex-direction: column;
+       background: #040d15;
+       } 
+       label{
+           position: relative;
+           height: 80px;
+           width: 80px;
+           cursor: pointer;
+           border-radius: 50%;
+       }
+          label .btn{
+             position: absolute;
+             top:0;
+             left:0;
+          display:block;
+          width: 100%;
+          height: 100%;
+          background: #1b1b1b;
+          border-radius: 50%;
+       box-shadow: 0 3px 4px rgba(0,0,0,1),
+                       inset 0 -2px 5px rgba(0,0,0,1),
+                        inset 0 2px 2px rgba(255,255,255,
+                        0.5),
+                        0 0 0 2px #000,
+                        0 0 0 5px #0c0c0c,
+                        0 0 0 5.5px #080808;
+          }
+           label input[type="checkbox"]:checked ~ .btn
+           {
+               box-shadow: 0 0 0 rgba(0,0,0,1),
+                       inset 0 -2px 5px rgba(0,0,0,1),
+                        inset 0 1px 1px rgba(255,255,255,
+                        0.1),
+                        0 0 0 2px #000,
+                        0 0 0 5px #0c0c0c,
+                        0 0 0 5.5px #00a1ff;
+           }
+          label input[type="checkbox"]
+          {
+         -webkit-appearance: none;               
+      }
+      label #lsd
+      {
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform: translate(-50%,-50%);
+          font-size: 3.5em;
+          color:#0c0c0c;
+      }
+      label input[type="checkbox"]:checked ~ #lsd
+      {
+          color:#00ffe7;
+          text-shadow: 0 0 15px #00a1ff,
+                         0 0 30px #00a1ff;
+          
+      }
+       #text{
+           color:white;
+           font-size:45px ;
+           text-border: 2px solid black ;
+            text-shadow: 2px 2px 5px #00a1ff;
+       }
+       
+       @media screen and (max-width: 380px)
+{
+    body{
+        height: 50%;
+        width: 50%;
+        margin: auto;
+    }
+ label{
+           position: relative;
+           height: 95px;
+           width: 95px;
+           cursor: pointer;
+           border-radius: 50%;
+       }
+  #text{
+           color:white;
+           font-size:60.5px ;
+           text-border: 2px solid black ;
+            text-shadow: 2px 2px 5px #00a1ff;
+       }
+}
+        </style>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+<body>
+<center><p id="text">Para comenzar</p></center>
+<label>
+    <input type="checkbox" name="">
+    <span class="btn"></span>
+    <i class="material-icons" id="lsd">&#xe02a;</i>
+</label>
+ <center><p id="text">Di "Hola Maria"</p></center>
+<script>
+
+    "use strict";
+    var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? 
+    function (e) { return typeof e } : function (e) { return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e };
+//! annyang
+//! version : 2.6.1
+//! author  : Tal Ater @TalAter
+//! license : MIT
+//! https://www.TalAter.com/annyang/
+//! annyang
+//! version : 2.6.1
+//! author  : Tal Ater @TalAter
+//! license : MIT
+//! https://www.TalAter.com/annyang/
+!function (e, n) { "function" == typeof define && define.amd ? define([], function () { return e.annyang = n(e) }) : "object" === ("undefined" == typeof module ? "undefined" : _typeof(module)) && module.exports ? module.exports = n(e) : e.annyang = n(e) }("undefined" != typeof window ? window : void 0, function (r, i) { var t, o = r.SpeechRecognition || r.webkitSpeechRecognition || r.mozSpeechRecognition || r.msSpeechRecognition || r.oSpeechRecognition; if (!o) return null; 
+var a, c, s = [], u = { start: [], error: [], end: [], soundstart: [], result: [], resultMatch: [], resultNoMatch: [], errorNetwork: [], errorPermissionBlocked: [], errorPermissionDenied: [] }, f = 0, l = 0, d = !1, p = "font-weight: bold; color: #00f;", g = !1, m = !1, h = /\s*\((.*?)\)\s*/g, y = /(\(\?:[^)]+\))\?/g, b = /(\(\?)?:\w+/g, v = /\*\w+/g, w = /[\-{}\[\]+?.,\\\^$|#]/g, S = function (e) { for (var n = arguments.length, t = Array(1 < n ? n - 1 : 0), o = 1; o < n; o++)t[o - 1] = arguments[o];
+e.forEach(function (e) { e.callback.apply(e.context, t) }) }, e = function () { return a !== i }, k = function (e, n) { -1 !== e.indexOf("%c") || n ? console.log(e, n || p) : console.log(e) }, x = function () { e() || t.init({}, !1) }, R = function (e, n, t) { s.push({ command: e, callback: n, originalPhrase: t }), d && k("Command successfully loaded: %c" + t, p) }, P = function (e) { var n; S(u.result, e); for (var t = 0; t < e.length; t++) { n = e[t].trim(), d && k("Speech recognized: %c" + n, p); for (var o = 0, r = s.length; o < r; o++) { var i = s[o], a = i.command.exec(n); if (a) { var c = a.slice(1);
+return d && (k("command matched: %c" + i.originalPhrase, p), c.length && k("with parameters", c)), i.callback.apply(this, c), void S(u.resultMatch, n, i.originalPhrase, e) } } } S(u.resultNoMatch, e) }; return t = { init: function (e) { var n = !(1 < arguments.length && arguments[1] !== i) || arguments[1]; a && a.abort && a.abort(), (a = new o).maxAlternatives = 5, a.continuous = "http:" === r.location.protocol, a.lang = "en-US", a.onstart = function () { m = !0, S(u.start) }, a.onsoundstart = function () { S(u.soundstart) }, a.onerror = function (e) { switch (S(u.error, e), e.error) { case "network": S(u.errorNetwork, e); break; case "not-allowed": case "service-not-allowed": c = !1, 
+(new Date).getTime() - f < 200 ? S(u.errorPermissionBlocked, e) : S(u.errorPermissionDenied, e) } }, a.onend = function () { if (m = !1, S(u.end), c) { var e = (new Date).getTime() - f; (l += 1) % 10 == 0 && d && k("Speech Recognition is repeatedly stopping and starting. See http://is.gd/annyang_restarts for tips."), e < 1e3 ? setTimeout(function () { t.start({ paused: g }) }, 1e3 - e) : t.start({ paused: g }) } }, a.onresult = function (e) { if (g) return d && k("Speech heard, but annyang is paused"), !1; for (var n = e.results[e.resultIndex], t = [], o = 0; o < n.length; o++)t[o] = n[o].transcript; P(t) }, n && (s = []), e.length && this.addCommands(e) }, start: function (e) { x(), g = (e = e || {}).paused !== i && !!e.paused, c = e.autoRestart === i || !!e.autoRestart, e.continuous !== i && (a.continuous = !!e.continuous), f = (new Date).getTime(); try { a.start() } 
+catch (e) { d && k(e.message) } }, abort: function () { c = !1, l = 0, e() && a.abort() }, pause: function () { g = !0 }, resume: function () { t.start() }, debug: function () { var e = !(0 < arguments.length && arguments[0] !== i) || arguments[0]; d = !!e }, setLanguage: function (e) { x(), a.lang = e }, addCommands: function (e) { var n, t; for (var o in x(), e) if (e.hasOwnProperty(o)) if ("function" == typeof (n = r[e[o]] || e[o])) R((t = (t = o).replace(w, "\\$&").replace(h, "(?:$1)?").replace(b, function (e, n) { return n ? e : "([^\\s]+)" }).replace(v, "(.*?)").replace(y, "\\s*$1?\\s*"), 
+new RegExp("^" + t + "$", "i")), n, o); else { if (!("object" === (void 0 === n ? "undefined" : _typeof(n)) && n.regexp instanceof RegExp)) { d && k("Can not register command: %c" + o, p); continue } R(new RegExp(n.regexp.source, "i"), n.callback, o) } }, removeCommands: function (t) { t === i ? s = [] : (t = Array.isArray(t) ? t : [t], s = s.filter(function (e) { for (var n = 0; n < t.length; n++)if (t[n] === e.originalPhrase) return !1; return !0 })) }, addCallback: function (e, n, t) { var o = r[n] || n; "function" == typeof o && u[e] !== i && u[e].push({ callback: o, context: t || this }) }, removeCallback: function (e, n) { var t = function (e) { return e.callback !== n }; for (var o in u) u.hasOwnProperty(o) && (e !== i && e !== o || (u[o] = n === i ? [] : u[o].filter(t))) }, isListening: function () { return m && !g }, getSpeechRecognizer: function () { return a }, trigger: function (e) { t.isListening() ? (Array.isArray(e) || (e = [e]), P(e)) : d && k(m ? "Speech heard, but annyang is paused" : "Cannot trigger while annyang is aborted") } } });
+
+</script>
+<script>
+    if (annyang) {
+
+    //Variable para almacenar las voces de nuestro sistema.
+    var voices;
+
+    //Inicializamos utter.
+    var utter = new SpeechSynthesisUtterance();
+    utter.rate = 1;
+    utter.pitch = 0.5;
+    utter.lang = 'es-AR';
+
+    //Cargamos las voces que tenemos en nuestro sistema y las mostarmos en un arreglo por consola.
+    window.speechSynthesis.onvoiceschanged = function () {
+        voices = window.speechSynthesis.getVoices();
+        console.log(voices);
+    };
+
+    //Definimos los comandos a utilizar.
+    var commands = {
+        'hola maria': function () {
+            utter.text = 'que quieres';
+            //Setea la voz que queremos usar en base a nuestra lista.
+            utter.voice = voices[2];
+            window.speechSynthesis.speak(utter);
+        },
+       
+        'soy gay': function () {
+            utter.text = 'Ay vale, mariquito!';
+            utter.voice = voices[2];
+            window.speechSynthesis.speak(utter);
+        },
+        'hola': function () {
+            utter.text = 'hola, cual es tu nombre?';
+            utter.voice = voices[2];
+            window.speechSynthesis.speak(utter);
+            //Guarda el nombre que le decimos por voz.
+            annyang.addCallback('result', function (phrases) {
+                //Imprime el nombre por consola.
+                console.log("Nombre: ", phrases[0]);
+                //Para el evento result.
+                annyang.removeCallback('result');
+                //Nos dice hola + el nombre que le digamos por voz.
+                utter.text = 'Hola, ' + phrases[0];
+                window.speechSynthesis.speak(utter);
+            });
+        },
+        'como estas': function () {
+            utter.text = 'Muy bien, y tu?';
+            utter.voice = voices[2];
+            window.speechSynthesis.speak(utter);
+            //Guarda el estado que le decimos por voz.
+            annyang.addCallback('result', function (phrases) {
+                //Imprime el estado por consola.
+                console.log("Y tu: ", phrases[0]);
+                //Para el evento result.
+                annyang.removeCallback('result');
+                //Nos dice Me alegra que estes + el estado que le digamos por voz.
+                utter.text = 'Me alegra que estes, ' + phrases[0];
+                window.speechSynthesis.speak(utter);
+            });
+        },
+         'que haces': function () {
+            utter.text = 'cosas de páginas, y tu?';
+            utter.voice = voices[2];
+            window.speechSynthesis.speak(utter);
+            //Guarda lo que ha que le decimos por voz.
+            annyang.addCallback('result', function (phrases) {
+                //Imprime por consola.
+                console.log("Y tu: ", phrases[0]);
+                //Para el evento result.
+                annyang.removeCallback('result');
+                //Nos dice que es + lo que le digamos por voz.
+                utter.text = 'que es, ' + phrases[0];
+                window.speechSynthesis.speak(utter);
+            });
+        },
+        //Array que devuelve aleatoriamente un elemento del array, en este caso un chiste.
+        'cuentame un chiste': function () {
+            chistes = ['Por qué las focas del circo miran siempre hacia arriba?   Porque es donde están los focos.',
+                'Estas obsesionado con la comida!   No se a que te refieres croquetamente.',
+                'Por que estás hablando con esas zapatillas?   Porque pone "converse"',
+                'Estas obsesionado con la comida!   No se a que te refieres croquetamente.',
+                'Por que estás hablando con esas zapatillas?   Porque pone "converse"',
+                '¿Cuál es la fruta más divertida?   La naranja "ja ja ja ja"',
+                ' ¿Cómo se dice espejo en chino?   "Aitoiyo"',
+                'Abuelo, ¿por qué estás delante del ordenador con los ojos cerrados?    "Es que Windows me ha dicho que cierre las pestañas"',
+                'Que le dice piso a otro piso?   "te piso"',
+                'Buenos dias, me gustaria alquilar "Batman Forever".   No es posible, tiene que devolverla tomorrow.'
+            ];
+            utter.text = chistes[Math.floor(Math.random() * chistes.length)]
+            utter.voice = voices[2];
+            window.speechSynthesis.speak(utter);
+        }
+        
+    };
+
+    //Esto nos sirve para ver que escucha el programa en tiempo real.
+    /*
+    annyang.addCallback('result', function(phrases) {
+      console.log("I think the user said: ", phrases[0]);
+      console.log("But then again, it could be any of the following: ", phrases);
+       });
+       */
+
+
+    //Sumamos todos los comandos a annyang.
+    annyang.addCommands(commands);
+
+    //Annyang comienza a escuchar.
+    annyang.start({ autoRestart: false, continuous: true });
+}
+</script>
+</body>
+</html>
+
+
