@@ -9,7 +9,9 @@ var body = document.querySelector('body'),
   forEach(function (el) {
     el.style.backgroundColor = el.textContent;
   });
-
+var nom;
+var pot;
+var pto;
 if (annyang) {
    var voices;
 //Inicializamos utter.
