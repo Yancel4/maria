@@ -27,59 +27,23 @@ if (annyang) {
  
   annyang.addCommands({
     'hola': function () {
-            utter.text = 'hola, cual es tu nombre?';
-            utter.voice = voices[2];
-            window.speechSynthesis.speak(utter);
-            //Guarda el nombre que le decimos por voz.
-            annyang.addCallback('result', function (phrases) {
-                //Imprime el nombre por consola.
-                console.log("Nombre: ", phrases[0]);
-                //Para el evento result.
-                annyang.removeCallback('result');
-                //Nos dice hola + el nombre que le digamos por voz.
-                utter.text = 'Hola, ' + phrases[0];
-                window.speechSynthesis.speak(utter);
-            });
+           nom=prompt("Cual es tu nombre? ","Nombre");
+alert("Mucho gusto "+ nom +"soy maria");
         }});
     annyang.addCommands({
      'hola maria': function () {
-            utter.text = 'que quieres';
-            //Setea la voz que queremos usar en base a nuestra lista.
-            utter.voice = voices[2];
-            window.speechSynthesis.speak(utter);
-        }   
+   alert("¿Que quieres?");
+          }   
     });
      annyang.addCommands({
           'como estas': function () {
-            utter.text = 'Muy bien, y tu?';
-            utter.voice = voices[2];
-            window.speechSynthesis.speak(utter);
-            //Guarda el estado que le decimos por voz.
-            annyang.addCallback('result', function (phrases) {
-                //Imprime el estado por consola.
-                console.log("Y tu: ", phrases[0]);
-                //Para el evento result.
-                annyang.removeCallback('result');
-                //Nos dice Me alegra que estes + el estado que le digamos por voz.
-                utter.text = 'Me alegra que estes, ' + phrases[0];
-                window.speechSynthesis.speak(utter);
-            });
+             pot=prompt("Muy bien, ¿Y tu? ","");
+alert("Me alegra que estes "+ pot);
         }});
      annyang.addCommands({
          'que haces': function () {
-            utter.text = 'cosas de páginas, y tu?';
-            utter.voice = voices[2];
-            window.speechSynthesis.speak(utter);
-            //Guarda lo que ha que le decimos por voz.
-            annyang.addCallback('result', function (phrases) {
-                //Imprime por consola.
-                console.log("Y tu: ", phrases[0]);
-                //Para el evento result.
-                annyang.removeCallback('result');
-                //Nos dice que es + lo que le digamos por voz.
-                utter.text = 'que es, ' + phrases[0];
-                window.speechSynthesis.speak(utter);
-            });
+          pto=prompt("Cosas de paginas, ¿Y tu? ","");
+ alert("¿Que es " + pto + "?");
         }});
      annyang.addCommands({
          //Array que devuelve aleatoriamente un elemento del array, en este caso un chiste.
